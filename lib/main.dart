@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'Ui/design/design.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
 
 void main() {
@@ -13,9 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Event Planning App',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-      ),
+      theme: AppThemes.lightTheme,
+      themeMode: ThemeMode.light,
       initialRoute: OnBoardingScreen.routeName,
       routes: {
         OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),

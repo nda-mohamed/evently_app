@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppColors {
   static const Color lightPrimary = Color(0xFF5669FF);
@@ -7,7 +8,6 @@ class AppColors {
 }
 
 class AppImages {
-  // static const String ic_stats = "assets/images/ic_stats.svg";
   static const String appIcon = "assets/images/app_logo.png";
   static const String icAr = "assets/images/ic_ar.png";
   static const String icEn = "assets/images/ic_en.png";
@@ -88,7 +88,7 @@ class AppThemes {
       selectedLabelStyle: TextStyle(color: Colors.white),
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
-    bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
+    //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.backgroundColor,
   );
   static var darkTheme = ThemeData(
@@ -159,7 +159,7 @@ class AppThemes {
       selectedLabelStyle: TextStyle(color: Colors.white),
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
-    bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
+    //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.darkBackgroundColor,
   );
 }
