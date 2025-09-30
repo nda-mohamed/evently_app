@@ -12,7 +12,7 @@ class AppNameText extends StatelessWidget {
       style: Theme.of(context).textTheme.titleLarge?.copyWith(
         fontWeight: FontWeight.w400,
         fontSize: 36,
-        color: AppColors.lightPrimary,
+        color: Theme.of(context).colorScheme.primary,
       ),
     );
   }

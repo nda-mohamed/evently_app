@@ -1,24 +1,48 @@
+import 'package:evently_app/routes.dart';
 import 'package:flutter/material.dart';
+import 'Ui/common/AppSharedPreferences.dart';
 import 'Ui/design/design.dart';
+import 'Ui/provider/LanguageProvider.dart';
+import 'Ui/provider/ThemeProvider.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
+import 'package:provider/provider.dart';
 
-void main() {
-  runApp(const MyApp());
+import 'l10n/app_localizations.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppSharedPreferences.init();
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => LanguageProvider()),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+
+    ThemeProvider provider = Provider.of<ThemeProvider>(context);
+    LanguageProvider languageProvider = Provider.of<LanguageProvider>(context);
+
     return MaterialApp(
       title: 'Event Planning App',
       theme: AppThemes.lightTheme,
-      themeMode: ThemeMode.light,
-      initialRoute: OnBoardingScreen.routeName,
+      themeMode: provider.getSelectedThemeMode(),
+      locale: languageProvider.getSelectedLocale(),
+
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+
+      initialRoute: AppRoutes.OnBoardingScreen.route,
       routes: {
-        OnBoardingScreen.routeName: (context) => const OnBoardingScreen(),
+        AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
       },
     );
   }

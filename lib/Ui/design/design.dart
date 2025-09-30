@@ -32,7 +32,9 @@ class AppThemes {
       centerTitle: true,
       iconTheme: IconThemeData(color: AppColors.lightPrimary),
     ),
+
     colorScheme: ColorScheme.light(primary: AppColors.lightPrimary),
+
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.jockeyOne(
         color: Colors.white,
@@ -54,7 +56,6 @@ class AppThemes {
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
-
       bodyMedium: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 16,
@@ -66,9 +67,9 @@ class AppThemes {
         fontWeight: FontWeight.bold,
       ),
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-
             padding: EdgeInsets.symmetric(vertical: 12),
             backgroundColor: AppColors.lightPrimary,
             textStyle: GoogleFonts.jockeyOne(
@@ -81,6 +82,7 @@ class AppThemes {
             )
         )
     ),
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.lightPrimary,
       selectedIconTheme: IconThemeData(color: Colors.white, size: 36),
@@ -88,9 +90,11 @@ class AppThemes {
       selectedLabelStyle: TextStyle(color: Colors.white),
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
+
     //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.backgroundColor,
   );
+
   static var darkTheme = ThemeData(
     appBarTheme: AppBarTheme(
       backgroundColor:  AppColors.darkBackgroundColor,
@@ -103,7 +107,9 @@ class AppThemes {
       centerTitle: true,
       iconTheme: IconThemeData(color: AppColors.lightPrimary),
     ),
+
     colorScheme: ColorScheme.light(primary: AppColors.lightPrimary),
+
     textTheme: TextTheme(
       bodyLarge: GoogleFonts.jockeyOne(
         color: Colors.white,
@@ -125,7 +131,6 @@ class AppThemes {
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
-
       bodyMedium: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 16,
@@ -137,6 +142,7 @@ class AppThemes {
         fontWeight: FontWeight.bold,
       ),
     ),
+
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
 
@@ -152,6 +158,7 @@ class AppThemes {
             )
         )
     ),
+
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: AppColors.lightPrimary,
       selectedIconTheme: IconThemeData(color: Colors.white, size: 36),
@@ -159,6 +166,7 @@ class AppThemes {
       selectedLabelStyle: TextStyle(color: Colors.white),
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
+
     //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.darkBackgroundColor,
   );
