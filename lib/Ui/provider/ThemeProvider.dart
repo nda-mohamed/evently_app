@@ -6,7 +6,7 @@ class ThemeProvider extends ChangeNotifier {
   AppSharedPreferences appSettingsPreferences = AppSharedPreferences.getInstance();
 
   ThemeProvider() {
-    _themeMode = appSettingsPreferences.getCurrentTheme();
+    _themeMode = appSettingsPreferences.getCurrentTheme() ?? ThemeMode.light;
   }
 
   List<ThemeMode> getModes() {

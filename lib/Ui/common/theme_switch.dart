@@ -20,9 +20,7 @@ class _ThemeSwitcherState extends State<ThemeSwitcher> {
       current: provider.getSelectedThemeMode(),
       values: provider.getModes(),
       onChanged: (newThemeMode) {
-        setState(() {
-          provider.changeTheme(newThemeMode);
-        });
+        provider.changeTheme(newThemeMode);
       },
       iconBuilder: (value, foreground) {
         if (value == ThemeMode.light) {

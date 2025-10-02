@@ -5,6 +5,7 @@ class AppColors {
   static const Color lightPrimary = Color(0xFF5669FF);
   static const Color backgroundColor = Color(0xFFF2FEFF);
   static const Color darkBackgroundColor = Color(0xFF101127);
+  static const Color gray = Color(0xFF7B7B7B);
 }
 
 class AppImages {
@@ -41,26 +42,31 @@ class AppThemes {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
+
       titleLarge: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
-      titleMedium:  GoogleFonts.jockeyOne(
+
+      titleMedium: GoogleFonts.jockeyOne(
         color: AppColors.lightPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w700,
       ),
+
       titleSmall: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
+
       bodyMedium: GoogleFonts.jockeyOne(
-        color: Colors.white,
+        color: Colors.black,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
+
       bodySmall: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 12,
@@ -69,18 +75,17 @@ class AppThemes {
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(vertical: 12),
-            backgroundColor: AppColors.lightPrimary,
-            textStyle: GoogleFonts.jockeyOne(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w500
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)
-            )
-        )
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        backgroundColor: AppColors.lightPrimary,
+        textStyle: GoogleFonts.inter(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+        foregroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
     ),
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
@@ -93,11 +98,35 @@ class AppThemes {
 
     //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.backgroundColor,
+
+    inputDecorationTheme: InputDecorationTheme(
+      floatingLabelBehavior: FloatingLabelBehavior.auto,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.lightPrimary, width: 1),
+      ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(16),
+        borderSide: BorderSide(color: AppColors.gray, width: 1),
+      ),
+      labelStyle: GoogleFonts.inter(
+        color: AppColors.gray,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      focusColor: AppColors.lightPrimary,
+      hintStyle: GoogleFonts.inter(
+        color: AppColors.gray,
+        fontSize: 16,
+        fontWeight: FontWeight.w500,
+      ),
+      contentPadding: EdgeInsets.all(16.0),
+    ),
   );
 
   static var darkTheme = ThemeData(
     appBarTheme: AppBarTheme(
-      backgroundColor:  AppColors.darkBackgroundColor,
+      backgroundColor: AppColors.darkBackgroundColor,
       surfaceTintColor: Colors.transparent,
       titleTextStyle: TextStyle(
         color: AppColors.lightPrimary,
@@ -116,26 +145,31 @@ class AppThemes {
         fontSize: 20,
         fontWeight: FontWeight.bold,
       ),
+
       titleLarge: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
       ),
-      titleMedium:  GoogleFonts.jockeyOne(
+
+      titleMedium: GoogleFonts.jockeyOne(
         color: AppColors.lightPrimary,
         fontSize: 20,
         fontWeight: FontWeight.w700,
       ),
+
       titleSmall: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 14,
         fontWeight: FontWeight.bold,
       ),
+
       bodyMedium: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
+
       bodySmall: GoogleFonts.jockeyOne(
         color: Colors.white,
         fontSize: 12,
@@ -144,19 +178,16 @@ class AppThemes {
     ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
-        style: ElevatedButton.styleFrom(
-
-            padding: EdgeInsets.symmetric(vertical: 12),
-            backgroundColor: AppColors.lightPrimary,
-            textStyle: GoogleFonts.jockeyOne(
-                color: Colors.white,
-                fontSize: 20,
-                fontWeight: FontWeight.w500
-            ),
-            shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12)
-            )
-        )
+      style: ElevatedButton.styleFrom(
+        padding: EdgeInsets.symmetric(vertical: 12),
+        backgroundColor: AppColors.lightPrimary,
+        textStyle: GoogleFonts.jockeyOne(
+          color: Colors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      ),
     ),
 
     bottomNavigationBarTheme: BottomNavigationBarThemeData(

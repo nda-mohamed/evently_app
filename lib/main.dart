@@ -7,6 +7,7 @@ import 'Ui/provider/ThemeProvider.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
 import 'package:provider/provider.dart';
 
+import 'Ui/screens/register/RegisterScreen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
@@ -34,15 +35,19 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Event Planning App',
       theme: AppThemes.lightTheme,
+      darkTheme: AppThemes.darkTheme,
       themeMode: provider.getSelectedThemeMode(),
+      debugShowCheckedModeBanner: false,
+
       locale: languageProvider.getSelectedLocale(),
 
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      initialRoute: AppRoutes.OnBoardingScreen.route,
+      initialRoute: AppRoutes.RegisterScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
+        AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),
       },
     );
   }

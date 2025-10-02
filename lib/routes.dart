@@ -1,6 +1,8 @@
 enum AppRoutes {
   HomeScreen("home"),
-  OnBoardingScreen("onBoarding"),;
+  OnBoardingScreen("onBoarding"),
+  RegisterScreen("register"),
+  ;
 
   final String route;
 
