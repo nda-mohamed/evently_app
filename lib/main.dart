@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      initialRoute: AppRoutes.RegisterScreen.route,
+      initialRoute: AppRoutes.OnBoardingScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
         AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),

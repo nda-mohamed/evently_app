@@ -2,8 +2,8 @@ import 'package:evently_app/Ui/common/AppNameText.dart';
 import 'package:evently_app/Ui/common/theme_switch.dart';
 import 'package:evently_app/Ui/design/design.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import '../../../l10n/app_localizations.dart';
+import '../../../routes.dart';
 import '../../common/language_switcher.dart';
 
 class OnBoardingScreen extends StatelessWidget {
@@ -87,7 +87,9 @@ class OnBoardingScreen extends StatelessWidget {
                   SizedBox(height: 24),
 
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.RegisterScreen.route);
+                    },
                     child: Text(
                       AppLocalizations.of(context)!.lets_start,
                       style: Theme.of(context).textTheme.bodyMedium?.copyWith(
