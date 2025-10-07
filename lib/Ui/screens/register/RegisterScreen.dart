@@ -3,7 +3,7 @@ import 'package:evently_app/Ui/design/design.dart';
 import 'package:evently_app/Ui/provider/AppAuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../../../routes.dart';
 import '../../common/CutomFormField.dart';
 import '../../common/validators.dart';
 
@@ -35,6 +35,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         title: Text("Register"),
         centerTitle: true,
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -109,17 +110,36 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   const SizedBox(height: 8),
 
                   ElevatedButton(
-                    onPressed: isLoading? null : () {
-                      createAccount();
-                    },
-                    child: isLoading? Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircularProgressIndicator(),
-                        SizedBox(width: 8),
-                        Text("Loading..."),
-                      ],
-                    ) : Text("Create Account"),
+                    onPressed: isLoading
+                        ? null
+                        : () {
+                            createAccount();
+                          },
+                    child: isLoading
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              CircularProgressIndicator(),
+                              SizedBox(width: 8),
+                              Text("Loading..."),
+                            ],
+                          )
+                        : Text("Create Account"),
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Already Have Account ? ",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),),
+                      TextButton(onPressed: (){
+                        Navigator.pushReplacementNamed(context, AppRoutes.LoginScreen.route);
+                      },
+                          child: Text("Login")
+                      )
+                    ],
                   ),
                 ],
               ),
@@ -137,14 +157,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
     setState(() {
       isLoading = true;
     });
-    AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false);
+
+    AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false,);
+
     AuthResponse response = await provider.register(
-        emailController.text,
-        passwordController.text,
-        nameController.text
+      emailController.text,
+      passwordController.text,
+      nameController.text,
     );
+
     if (response.success) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User created successfully")),);
+      ScaffoldMessenger.of(context,).showSnackBar(SnackBar(content: Text("User created successfully",)));
+      Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.route);
     } else {
       handleAuthError(response);
     }
@@ -171,6 +195,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         errorMessage = "Something went wrong";
     }
 
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)),);
+    ScaffoldMessenger.of(context,).showSnackBar(SnackBar(content: Text(errorMessage)));
   }
 }

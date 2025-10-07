@@ -12,7 +12,8 @@ class AppFormField extends StatefulWidget {
     this.isPassword = false,
     this.validator,
     this.controller,
-    super.key});
+    super.key,
+  });
 
   String label;
   IconData icon;
@@ -51,16 +52,20 @@ class _AppFormFieldState extends State<AppFormField> {
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           labelText: widget.label,
-          prefixIcon: Icon(widget.icon, color: AppColors.gray,),
-          suffixIcon: widget.isPassword ? InkWell(
-            onTap: () {
-              setState(() {
-                secureText = !secureText;
-              });
-            },
-            child: Icon(secureText ? Icons.visibility : Icons.visibility_off,
-              color: AppColors.gray,),
-          ) : null,
+          prefixIcon: Icon(widget.icon, color: AppColors.gray),
+          suffixIcon: widget.isPassword
+              ? InkWell(
+                  onTap: () {
+                    setState(() {
+                      secureText = !secureText;
+                    });
+                  },
+                  child: Icon(
+                    secureText ? Icons.visibility_off : Icons.visibility,
+                    color: AppColors.gray,
+                  ),
+                )
+              : null,
         ),
       ),
     );

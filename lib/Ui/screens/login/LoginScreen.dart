@@ -3,7 +3,7 @@ import 'package:evently_app/Ui/design/design.dart';
 import 'package:evently_app/Ui/provider/AppAuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import '../../../routes.dart';
 import '../../common/CutomFormField.dart';
 import '../../common/validators.dart';
 
@@ -31,6 +31,7 @@ class _RegisterScreenState extends State<LoginScreen> {
         title: Text("Login"),
         centerTitle: true,
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -88,6 +89,21 @@ class _RegisterScreenState extends State<LoginScreen> {
                       ],
                     ) : Text("Sign in"),
                   ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Don't Have Account ? ",
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),),
+                      TextButton(onPressed: (){
+                        Navigator.pushReplacementNamed(context, AppRoutes.RegisterScreen.route);
+                      },
+                          child: Text("Create Account")
+                      )
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -104,13 +120,17 @@ class _RegisterScreenState extends State<LoginScreen> {
     setState(() {
       isLoading = true;
     });
+
     AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false);
+
     AuthResponse response = await provider.login(
         emailController.text,
         passwordController.text,
     );
+
     if (response.success) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in successfully")),);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in successfully")));
+      Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.route);
     } else {
       handleAuthError(response);
     }

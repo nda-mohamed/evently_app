@@ -3,7 +3,8 @@ import '../common/AppSharedPreferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
   late ThemeMode _themeMode;
-  AppSharedPreferences appSettingsPreferences = AppSharedPreferences.getInstance();
+  AppSharedPreferences appSettingsPreferences =
+      AppSharedPreferences.getInstance();
 
   ThemeProvider() {
     _themeMode = appSettingsPreferences.getCurrentTheme() ?? ThemeMode.light;

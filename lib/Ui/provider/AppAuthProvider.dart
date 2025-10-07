@@ -1,9 +1,46 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../database/UsersDao.dart';
+import '../../database/model/AppUser.dart';
 
 class AppAuthProvider extends ChangeNotifier {
-
   var _fb_authService = FirebaseAuth.instance; //singleton
+  AppUser? _databaseUser;
+
+  AppAuthProvider(){
+    retrieveUserFromDatabase();
+  }
+
+  AppUser? getUser(){
+    return _databaseUser;
+  }
+  void logout(){
+    _fb_authService.signOut();
+    _databaseUser = null;
+    _fbAuthUser = null;
+    notifyListeners();
+  }
+
+  void retrieveUserFromDatabase() async {
+    if(_fbAuthUser!=null){
+      _databaseUser = await UsersDao.getUserById(_fbAuthUser?.uid);
+      notifyListeners();
+    }
+  }
+
+  var _fbAuthUser = FirebaseAuth.instance.currentUser;
+
+  bool isLoggedInBefore(){
+    var user = FirebaseAuth.instance.currentUser;
+
+    if(user == null){
+      return false;
+    }
+
+    return true;
+  }
 
   Future<AuthResponse> register(String email, String password, String name) async {
     try {
@@ -12,8 +49,15 @@ class AppAuthProvider extends ChangeNotifier {
         password: password,
       );
 
-      return AuthResponse(success: true, failure: null, credential: credential);
+      AppUser user = AppUser(
+        id: credential.user!.uid,
+        name: name,
+        email: email,
+      );
 
+      await UsersDao.addUser(user);
+
+      return AuthResponse(success: true, failure: null, credential: credential);
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthFailure.weakPassword.code) {
         return AuthResponse(success: false, failure: AuthFailure.weakPassword);
@@ -30,25 +74,35 @@ class AppAuthProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
+
+      AppUser? user = await UsersDao.getUserById(credential.user!.uid);
+
       return AuthResponse(success: true, failure: null, credential: credential);
 
     } on FirebaseAuthException catch (e) {
       if (e.code == AuthFailure.invalidCredential.code) {
-        return AuthResponse(success: false, failure: AuthFailure.invalidCredential);
+        return AuthResponse(
+          success: false,
+          failure: AuthFailure.invalidCredential,
+        );
       }
     } catch (e) {}
     return AuthResponse(success: false, failure: AuthFailure.general);
   }
-
 }
 
 class AuthResponse {
   bool success;
   AuthFailure? failure;
   UserCredential? credential;
+  AppUser? user;
 
-  AuthResponse({required this.success, this.failure, this.credential});
-
+  AuthResponse({
+    required this.success,
+    this.failure,
+    this.credential,
+    this.user,
+  });
 }
 
 enum AuthFailure {

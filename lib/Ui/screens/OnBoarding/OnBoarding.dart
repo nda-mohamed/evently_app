@@ -52,7 +52,7 @@ class OnBoardingScreen extends StatelessWidget {
 
                   Text(
                     AppLocalizations.of(context)!.onboarding_screen_subtitle,
-                    style: Theme.of(context,).textTheme.bodyMedium,
+                    style: Theme.of(context).textTheme.bodyMedium,
                     textAlign: TextAlign.start,
                   ),
 
@@ -63,7 +63,8 @@ class OnBoardingScreen extends StatelessWidget {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.language,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
                       ),
                       LanguageSwitcher(),
@@ -77,7 +78,8 @@ class OnBoardingScreen extends StatelessWidget {
                     children: [
                       Text(
                         AppLocalizations.of(context)!.theme,
-                        style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w500),
+                        style: Theme.of(context).textTheme.titleMedium
+                            ?.copyWith(fontWeight: FontWeight.w500),
                         textAlign: TextAlign.start,
                       ),
                       ThemeSwitcher(),
@@ -88,7 +90,10 @@ class OnBoardingScreen extends StatelessWidget {
 
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.RegisterScreen.route);
+                      Navigator.pushNamed(
+                        context,
+                        AppRoutes.RegisterScreen.route,
+                      );
                     },
                     child: Text(
                       AppLocalizations.of(context)!.lets_start,

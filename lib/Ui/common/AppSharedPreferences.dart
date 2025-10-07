@@ -51,7 +51,8 @@ class AppSharedPreferences {
 
   Locale getCurrentLocale() {
     var langCode = _sharedPreferences.getString("locale");
-    return langCode == null ? Locale('en')
+    return langCode == null
+        ? Locale('en')
         : Locale.fromSubtags(languageCode: langCode);
   }
 }
