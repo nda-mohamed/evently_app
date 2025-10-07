@@ -7,21 +7,17 @@ import 'package:provider/provider.dart';
 import '../../common/CutomFormField.dart';
 import '../../common/validators.dart';
 
-class RegisterScreen extends StatefulWidget {
-  RegisterScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  LoginScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  State<LoginScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
-  TextEditingController nameController = TextEditingController();
-
+class _RegisterScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
 
   TextEditingController passwordController = TextEditingController();
-
-  TextEditingController rePasswordController = TextEditingController();
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
@@ -32,7 +28,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
-        title: Text("Register"),
+        title: Text("Login"),
         centerTitle: true,
       ),
       body: Padding(
@@ -46,19 +42,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  AppFormField(
-                    controller: nameController,
-                    label: "Name",
-                    icon: Icons.person,
-                    keyboardType: TextInputType.name,
-                    validator: (text) {
-                      if (text?.trim().isEmpty == true) {
-                        return "Please enter your name";
-                      }
-                      return null;
-                    },
-                  ),
-
                   AppFormField(
                     controller: emailController,
                     label: "E-mail",
@@ -90,27 +73,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     },
                   ),
 
-                  AppFormField(
-                    controller: rePasswordController,
-                    label: "Re-Password",
-                    icon: Icons.lock,
-                    keyboardType: TextInputType.text,
-                    isPassword: true,
-                    validator: (text) {
-                      if (text?.trim().isEmpty == true) {
-                        return "please enter password";
-                      }
-                      if (passwordController.text != text) {
-                        return "Password does not match";
-                      }
-                    },
-                  ),
-
                   const SizedBox(height: 8),
 
                   ElevatedButton(
                     onPressed: isLoading? null : () {
-                      createAccount();
+                      login();
                     },
                     child: isLoading? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -119,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         SizedBox(width: 8),
                         Text("Loading..."),
                       ],
-                    ) : Text("Create Account"),
+                    ) : Text("Sign in"),
                   ),
                 ],
               ),
@@ -130,7 +97,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
   }
 
-  void createAccount() async {
+  void login() async {
     if (validateForm() == false) {
       return;
     }
@@ -138,13 +105,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
       isLoading = true;
     });
     AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false);
-    AuthResponse response = await provider.register(
+    AuthResponse response = await provider.login(
         emailController.text,
         passwordController.text,
-        nameController.text
     );
     if (response.success) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("User created successfully")),);
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Logged in successfully")),);
     } else {
       handleAuthError(response);
     }
@@ -161,14 +127,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     String errorMessage;
 
     switch (response.failure) {
-      case AuthFailure.weakPassword:
-        errorMessage = "Weak password";
-        break;
-      case AuthFailure.emailInUse:
-        errorMessage = "Email already used";
+      case AuthFailure.invalidCredential:
+        errorMessage = "Wrong email or password";
         break;
       default:
         errorMessage = "Something went wrong";
+        break;
     }
 
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)),);

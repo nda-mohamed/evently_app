@@ -1,23 +1,34 @@
+import 'package:evently_app/Ui/screens/login/LoginScreen.dart';
 import 'package:evently_app/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Ui/common/AppSharedPreferences.dart';
 import 'Ui/design/design.dart';
+import 'Ui/provider/AppAuthProvider.dart';
 import 'Ui/provider/LanguageProvider.dart';
 import 'Ui/provider/ThemeProvider.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
 import 'package:provider/provider.dart';
-
 import 'Ui/screens/register/RegisterScreen.dart';
+import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   await AppSharedPreferences.init();
+
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
         ChangeNotifierProvider(create: (_) => LanguageProvider()),
+        ChangeNotifierProvider(create: (_) => AppAuthProvider()),
       ],
       child: const MyApp(),
     ),
@@ -44,10 +55,11 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      initialRoute: AppRoutes.OnBoardingScreen.route,
+      initialRoute: AppRoutes.LoginScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
         AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),
+        AppRoutes.LoginScreen.route: (context) => LoginScreen(),
       },
     );
   }
