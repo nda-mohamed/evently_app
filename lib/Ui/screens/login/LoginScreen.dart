@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../routes.dart';
 import '../../common/CutomFormField.dart';
+import '../../common/language_switcher.dart';
 import '../../common/validators.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -16,28 +17,23 @@ class LoginScreen extends StatefulWidget {
 
 class _RegisterScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        title: Text("Login"),
-        centerTitle: true,
-      ),
-
+      appBar: AppBar(title: Text("Login"), centerTitle: true,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Image.asset(AppImages.appIcon, width: 136, height: 141),
             AppNameText(),
+
+            const SizedBox(height: 20),
+
             Form(
               key: formKey,
               child: Column(
@@ -66,7 +62,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                     isPassword: true,
                     validator: (text) {
                       if (text?.trim().isEmpty == true) {
-                        return "please enter password";
+                        return "Please enter password";
                       }
                       if ((text?.length ?? 0) < 6) {
                         return "Password must be at least 6 characters";
@@ -77,17 +73,17 @@ class _RegisterScreenState extends State<LoginScreen> {
                   const SizedBox(height: 8),
 
                   ElevatedButton(
-                    onPressed: isLoading? null : () {
-                      login();
-                    },
-                    child: isLoading? Row(
+                    onPressed: isLoading ? null : login,
+                    child: isLoading
+                        ? Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         CircularProgressIndicator(),
                         SizedBox(width: 8),
                         Text("Loading..."),
                       ],
-                    ) : Text("Sign in"),
+                    )
+                        : Text("Sign in"),
                   ),
 
                   const SizedBox(height: 8),
@@ -95,13 +91,56 @@ class _RegisterScreenState extends State<LoginScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't Have Account ? ",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),),
-                      TextButton(onPressed: (){
-                        Navigator.pushReplacementNamed(context, AppRoutes.RegisterScreen.route);
-                      },
-                          child: Text("Create Account")
-                      )
+                      Text(
+                        "Don't Have Account ? ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.black),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.RegisterScreen.route,
+                          );
+                        },
+                        child: Text("Create Account"),
+                      ),
+                    ],
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "Forgot your password? ",
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyMedium
+                            ?.copyWith(color: Colors.black),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.ForgetPasswordScreen.route,
+                          );
+                        },
+                        child: Text(
+                          "Reset Password",
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      LanguageSwitcher(),
                     ],
                   ),
                 ],
@@ -114,18 +153,16 @@ class _RegisterScreenState extends State<LoginScreen> {
   }
 
   void login() async {
-    if (validateForm() == false) {
-      return;
-    }
-    setState(() {
-      isLoading = true;
-    });
+    if (validateForm() == false) return;
 
-    AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false);
+    setState(() => isLoading = true);
+
+    AppAuthProvider provider =
+    Provider.of<AppAuthProvider>(context, listen: false);
 
     AuthResponse response = await provider.login(
-        emailController.text,
-        passwordController.text,
+      emailController.text,
+      passwordController.text,
     );
 
     if (response.success) {
@@ -134,9 +171,8 @@ class _RegisterScreenState extends State<LoginScreen> {
     } else {
       handleAuthError(response);
     }
-    setState(() {
-      isLoading = false;
-    });
+
+    setState(() => isLoading = false);
   }
 
   bool validateForm() {
@@ -154,7 +190,6 @@ class _RegisterScreenState extends State<LoginScreen> {
         errorMessage = "Something went wrong";
         break;
     }
-
-    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)),);
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(errorMessage)));
   }
 }

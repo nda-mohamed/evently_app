@@ -3,11 +3,15 @@ import 'package:evently_app/Ui/design/design.dart';
 import 'package:evently_app/Ui/provider/AppAuthProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../l10n/app_localizations.dart';
 import '../../../routes.dart';
 import '../../common/CutomFormField.dart';
+import '../../common/language_switcher.dart';
 import '../../common/validators.dart';
 
 class RegisterScreen extends StatefulWidget {
+  static const String route = "register";
+
   RegisterScreen({super.key});
 
   @override
@@ -30,11 +34,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: true,
-        title: Text("Register"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text("Register"), centerTitle: true),
 
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -42,6 +42,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           children: [
             Image.asset(AppImages.appIcon, width: 136, height: 141),
             AppNameText(),
+            const SizedBox(height: 16),
             Form(
               key: formKey,
               child: Column(
@@ -132,14 +133,29 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Already Have Account ? ",
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),),
-                      TextButton(onPressed: (){
-                        Navigator.pushReplacementNamed(context, AppRoutes.LoginScreen.route);
-                      },
-                          child: Text("Login")
-                      )
+                      Text(
+                        "Already Have Account ? ",
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(
+                            context,
+                            AppRoutes.LoginScreen.route,
+                          );
+                        },
+                        child: Text("Login"),
+                      ),
                     ],
+                  ),
+
+                  const SizedBox(height: 8),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [LanguageSwitcher()],
                   ),
                 ],
               ),
@@ -158,7 +174,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
       isLoading = true;
     });
 
-    AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false,);
+    AppAuthProvider provider = Provider.of<AppAuthProvider>(
+      context,
+      listen: false,
+    );
 
     AuthResponse response = await provider.register(
       emailController.text,
@@ -167,7 +186,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
     );
 
     if (response.success) {
-      ScaffoldMessenger.of(context,).showSnackBar(SnackBar(content: Text("User created successfully",)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text("User created successfully")));
       Navigator.pushReplacementNamed(context, AppRoutes.HomeScreen.route);
     } else {
       handleAuthError(response);
@@ -195,6 +216,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
         errorMessage = "Something went wrong";
     }
 
-    ScaffoldMessenger.of(context,).showSnackBar(SnackBar(content: Text(errorMessage)));
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(errorMessage)));
   }
 }

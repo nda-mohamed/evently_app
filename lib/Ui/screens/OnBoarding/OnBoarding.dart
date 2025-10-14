@@ -7,6 +7,8 @@ import '../../../routes.dart';
 import '../../common/language_switcher.dart';
 
 class OnBoardingScreen extends StatelessWidget {
+  static const String route = "onBoarding";
+
   const OnBoardingScreen({super.key});
 
   @override
@@ -92,7 +94,7 @@ class OnBoardingScreen extends StatelessWidget {
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
-                        AppRoutes.RegisterScreen.route,
+                        AppRoutes.IntroScreen.route,
                       );
                     },
                     child: Text(

@@ -1,13 +1,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../database/UsersDao.dart';
 import '../../database/model/AppUser.dart';
 
 class AppAuthProvider extends ChangeNotifier {
   var _fb_authService = FirebaseAuth.instance; //singleton
-  AppUser? _databaseUser;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  Future<bool> sendPasswordReset(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    } on FirebaseAuthException catch (e) {
+      print("sendPasswordReset error: ${e.code}");
+      return false;
+    } catch (e) {
+      print("sendPasswordReset unknown error: $e");
+      return false;
+    }
+  }
 
   AppAuthProvider(){
     retrieveUserFromDatabase();
@@ -30,7 +41,9 @@ class AppAuthProvider extends ChangeNotifier {
     }
   }
 
+  // save user in memory
   var _fbAuthUser = FirebaseAuth.instance.currentUser;
+  AppUser? _databaseUser;
 
   bool isLoggedInBefore(){
     var user = FirebaseAuth.instance.currentUser;
@@ -56,6 +69,8 @@ class AppAuthProvider extends ChangeNotifier {
       );
 
       await UsersDao.addUser(user);
+      _databaseUser = user;
+      _fbAuthUser = credential.user;
 
       return AuthResponse(success: true, failure: null, credential: credential);
     } on FirebaseAuthException catch (e) {
@@ -76,6 +91,9 @@ class AppAuthProvider extends ChangeNotifier {
       );
 
       AppUser? user = await UsersDao.getUserById(credential.user!.uid);
+
+      _databaseUser = user;
+      _fbAuthUser = credential.user;
 
       return AuthResponse(success: true, failure: null, credential: credential);
 

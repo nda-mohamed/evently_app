@@ -1,6 +1,5 @@
 import 'package:evently_app/Ui/screens/login/LoginScreen.dart';
 import 'package:evently_app/routes.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Ui/common/AppSharedPreferences.dart';
@@ -10,7 +9,9 @@ import 'Ui/provider/LanguageProvider.dart';
 import 'Ui/provider/ThemeProvider.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
 import 'package:provider/provider.dart';
+import 'Ui/screens/forgetPassword/forgetPassword.dart';
 import 'Ui/screens/home/HomeScreen.dart';
+import 'Ui/screens/intro/introScreens.dart';
 import 'Ui/screens/register/RegisterScreen.dart';
 import 'firebase_options.dart';
 import 'l10n/app_localizations.dart';
@@ -59,11 +60,13 @@ class MyApp extends StatelessWidget {
       restorationScopeId: authProvider.isLoggedInBefore() ? AppRoutes.HomeScreen.route
           : AppRoutes.LoginScreen.route,
 
-      initialRoute: AppRoutes.RegisterScreen.route,
+      initialRoute: AppRoutes.LoginScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
-        AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),
+        AppRoutes.IntroScreen.route: (context) => IntroScreen(),
         AppRoutes.LoginScreen.route: (context) => LoginScreen(),
+        AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),
+        AppRoutes.ForgetPasswordScreen.route: (context) => ForgetPasswordScreen(),
         AppRoutes.HomeScreen.route: (context) => HomeScreen(),
       },
     );

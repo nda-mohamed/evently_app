@@ -18,6 +18,28 @@ class AppImages {
   static const String onBoarding1 = "assets/images/onboarding_1.png";
   static const String onBoarding2 = "assets/images/onboarding2.png";
   static const String onBoarding3 = "assets/images/onboarding3.png";
+  static const String onBoarding4 = "assets/images/onboarding4.png";
+  static const String forget_password = "assets/images/forget_password.png";
+
+  static const String home = "assets/icons/home.svg";
+  static const String homeFill = "assets/icons/home_fill.svg";
+  static const String map = "assets/icons/map.svg";
+  static const String mapFill = "assets/icons/map_fill.svg";
+  static const String heart = "assets/icons/heart.svg";
+  static const String heartFill = "assets/icons/heart_fill.svg";
+  static const String user = "assets/icons/user.svg";
+  static const String userFill = "assets/icons/user_fill.svg";
+
+  static const String Birthday = "assets/tabs/Birthday.png";
+  static const String Book_Club = "assets/tabs/Book_Club.png";
+  static const String Eating = "assets/tabs/Eating.png";
+  static const String Exhibition = "assets/tabs/Exhibition.png";
+  static const String Gaming = "assets/tabs/Gaming.png";
+  static const String Holiday = "assets/tabs/Holiday.png";
+  static const String Meeting = "assets/tabs/Meeting.png";
+  static const String Sports = "assets/tabs/Sports.png";
+  static const String Work_Shop = "assets/tabs/Work_Shop.png";
+
 }
 
 class AppThemes {

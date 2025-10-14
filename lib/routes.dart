@@ -2,7 +2,9 @@ enum AppRoutes {
   HomeScreen("home"),
   OnBoardingScreen("onBoarding"),
   RegisterScreen("register"),
-  LoginScreen("Login");
+  LoginScreen("Login"),
+  IntroScreen("intro"),
+  ForgetPasswordScreen("forget_password");
 
   final String route;
 
