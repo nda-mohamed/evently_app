@@ -9,6 +9,7 @@ import 'Ui/provider/LanguageProvider.dart';
 import 'Ui/provider/ThemeProvider.dart';
 import 'Ui/screens/OnBoarding/OnBoarding.dart';
 import 'package:provider/provider.dart';
+import 'Ui/screens/addEvent/AddEventScreen.dart';
 import 'Ui/screens/forgetPassword/forgetPassword.dart';
 import 'Ui/screens/home/HomeScreen.dart';
 import 'Ui/screens/intro/introScreens.dart';
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
       restorationScopeId: authProvider.isLoggedInBefore() ? AppRoutes.HomeScreen.route
           : AppRoutes.LoginScreen.route,
 
-      initialRoute: AppRoutes.LoginScreen.route,
+      initialRoute: AppRoutes.HomeScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
         AppRoutes.IntroScreen.route: (context) => IntroScreen(),
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.RegisterScreen.route: (context) => RegisterScreen(),
         AppRoutes.ForgetPasswordScreen.route: (context) => ForgetPasswordScreen(),
         AppRoutes.HomeScreen.route: (context) => HomeScreen(),
+        AppRoutes.AddEventScreen.route: (context) => AddEventScreen(),
       },
     );
   }

@@ -118,7 +118,7 @@ class AppThemes {
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
 
-    //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
+    bottomAppBarTheme: BottomAppBarThemeData(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.backgroundColor,
 
     inputDecorationTheme: InputDecorationTheme(
@@ -220,7 +220,7 @@ class AppThemes {
       unselectedLabelStyle: TextStyle(color: Colors.black),
     ),
 
-    //bottomAppBarTheme: BottomAppBarTheme(color: AppColors.lightPrimary),
+    bottomAppBarTheme: BottomAppBarThemeData(color: AppColors.lightPrimary),
     scaffoldBackgroundColor: AppColors.darkBackgroundColor,
   );
 }
