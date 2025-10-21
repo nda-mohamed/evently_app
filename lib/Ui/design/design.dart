@@ -59,13 +59,7 @@ class AppThemes {
     colorScheme: ColorScheme.light(primary: AppColors.lightPrimary),
 
     textTheme: TextTheme(
-      bodyLarge: GoogleFonts.jockeyOne(
-        color: Colors.white,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-
-      titleLarge: GoogleFonts.jockeyOne(
+      titleLarge: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -83,13 +77,19 @@ class AppThemes {
         fontWeight: FontWeight.bold,
       ),
 
-      bodyMedium: GoogleFonts.jockeyOne(
+      bodyLarge: GoogleFonts.jockeyOne(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+
+      bodyMedium: GoogleFonts.inter(
         color: Colors.black,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
 
-      bodySmall: GoogleFonts.jockeyOne(
+      bodySmall: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 12,
         fontWeight: FontWeight.bold,
@@ -162,13 +162,7 @@ class AppThemes {
     colorScheme: ColorScheme.light(primary: AppColors.lightPrimary),
 
     textTheme: TextTheme(
-      bodyLarge: GoogleFonts.jockeyOne(
-        color: Colors.white,
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
-
-      titleLarge: GoogleFonts.jockeyOne(
+      titleLarge: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -186,13 +180,19 @@ class AppThemes {
         fontWeight: FontWeight.bold,
       ),
 
-      bodyMedium: GoogleFonts.jockeyOne(
+      bodyLarge: GoogleFonts.jockeyOne(
+        color: Colors.white,
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+      ),
+
+      bodyMedium: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 16,
         fontWeight: FontWeight.w500,
       ),
 
-      bodySmall: GoogleFonts.jockeyOne(
+      bodySmall: GoogleFonts.inter(
         color: Colors.white,
         fontSize: 12,
         fontWeight: FontWeight.bold,

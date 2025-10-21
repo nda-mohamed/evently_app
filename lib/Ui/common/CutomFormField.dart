@@ -5,22 +5,24 @@ import '../design/design.dart';
 typedef Validator = String? Function(String? text);
 
 class AppFormField extends StatefulWidget {
-  AppFormField({
-    required this.label,
-    required this.icon,
-    this.keyboardType = TextInputType.text,
-    this.isPassword = false,
-    this.validator,
-    this.controller,
-    super.key,
-  });
-
   String label;
-  IconData icon;
+  IconData? icon;
   TextInputType keyboardType;
   bool isPassword;
   Validator? validator;
   TextEditingController? controller;
+  int lines;
+
+  AppFormField({
+    required this.label,
+    this.icon,
+    this.keyboardType = TextInputType.text,
+    this.isPassword = false,
+    this.validator,
+    this.controller,
+    this.lines = 1,
+    super.key,
+  });
 
   @override
   State<AppFormField> createState() => _AppFormFieldState();
@@ -40,6 +42,7 @@ class _AppFormFieldState extends State<AppFormField> {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 8),
       child: TextFormField(
+        maxLines: widget.lines,
         controller: widget.controller,
         style: GoogleFonts.inter(
           fontSize: 16,
@@ -52,7 +55,9 @@ class _AppFormFieldState extends State<AppFormField> {
         keyboardType: widget.keyboardType,
         decoration: InputDecoration(
           labelText: widget.label,
-          prefixIcon: Icon(widget.icon, color: AppColors.gray),
+          prefixIcon: widget.icon != null
+              ? Icon(widget.icon, color: AppColors.gray)
+              : null,
           suffixIcon: widget.isPassword
               ? InkWell(
                   onTap: () {

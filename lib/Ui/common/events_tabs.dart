@@ -7,11 +7,15 @@ typedef OnTabSelected = Function(int index, Category category);
 class EventTabs extends StatelessWidget {
   OnTabSelected onTabSelected;
   int currentTabIndex = 0;
-
   List<Category> categories;
-
-  EventTabs(this.categories, this.currentTabIndex, this.onTabSelected, {this.reversed = false});
   bool reversed;
+
+  EventTabs(
+    this.categories,
+    this.currentTabIndex,
+    this.onTabSelected, {
+    this.reversed = false,
+  });
 
   @override
   Widget build(BuildContext context) {

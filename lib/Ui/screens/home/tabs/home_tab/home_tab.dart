@@ -1,4 +1,5 @@
 import 'package:evently_app/Ui/screens/home/tabs/home_tab/widgets/event_cards.dart';
+import 'package:evently_app/database/EventDao.dart';
 import 'package:flutter/material.dart';
 
 class HomeTab extends StatelessWidget {
@@ -13,11 +14,23 @@ class HomeTab extends StatelessWidget {
       child: Column(
         children: [
           Expanded(
-            child: ListView.separated(
-              itemCount: 2,
-              separatorBuilder: (context, index) => SizedBox(height: 16),
-              itemBuilder: (context, index) => EventCards(),
-            ),
+            child: FutureBuilder(future: EventsDao.getEvents(null), builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text("Something went Wrong"));
+              }
+
+              var events = snapshot.data;
+
+              return ListView.separated(
+                itemCount: events?.length ?? 0,
+                separatorBuilder: (context, index) => SizedBox(height: 16),
+                itemBuilder: (context, index) => EventCard(
+                  events![index],
+                ),
+              );
+            }),
           ),
         ],
       ),

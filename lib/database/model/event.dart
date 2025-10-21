@@ -20,8 +20,8 @@ class Event {
 
   factory Event.fromMap(Map<String, dynamic>? map) {
     return Event(
-        //id: map?['id'],
-        //creatorUserId: map?['creatorUserId'],
+        id: map?['id'],
+        creatorUserId: map?['creatorUserId'],
         title: map?['title'],
         desc: map?['desc'],
         categoryId: map?['categoryId'],
