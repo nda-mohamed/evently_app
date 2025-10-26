@@ -2,7 +2,10 @@ import 'package:evently_app/extensions/context_extention.dart';
 import 'package:evently_app/extensions/date_time_extentions.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../../../../../../database/UsersDao.dart';
 import '../../../../../../database/model/event.dart';
+import '../../../../../provider/AppAuthProvider.dart';
 
 class EventCard extends StatefulWidget {
   final Event event;
@@ -13,9 +16,11 @@ class EventCard extends StatefulWidget {
 }
 
 class _EventCardState extends State<EventCard> {
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
+
     return Container(
       padding: EdgeInsets.all(8),
       height: size.height * .25,
@@ -78,9 +83,9 @@ class _EventCardState extends State<EventCard> {
                   ),
                 ),
                 InkWell(
-                  // onTap: () {
-                  //   toggleFavorite(widget.event);
-                  // },
+                  onTap: () {
+                    toggleFavorite(widget.event);
+                  },
                   child: widget.event.isFavorite
                       ? Icon(Icons.favorite)
                       : Icon(Icons.favorite_border),
@@ -93,18 +98,24 @@ class _EventCardState extends State<EventCard> {
     );
   }
 
-  // void toggleFavorite( Event event)async{
-  //   AppAuthProvider provider = Provider.of<AppAuthProvider>(context, listen: false);
-  //   var user = provider.getUser();
-  //   var isFavorite = provider.isFavorite(event);
-  //   if(isFavorite){
-  //     user =  await UsersDao.removeEventFromFavorites(provider.getUser()!,event.id);
-  //   }else{
-  //     user = await UsersDao.addEventToFavorites(provider.getUser()!,event.id,);
-  //   }
-  //   provider.updateFavorites(user.favorites);
-  //   setState(() {
-  //     widget.event.isFavorite = !isFavorite;
-  //   });
-  // }
+  void toggleFavorite(Event event) async {
+    AppAuthProvider provider = Provider.of<AppAuthProvider>(
+      context,
+      listen: false,
+    );
+    var user = provider.getUser();
+    var isFavorite = provider.isFavorite(event);
+    if (isFavorite) {
+      user = await UsersDao.removeEventFromFavorites(
+        provider.getUser()!,
+        event.id,
+      );
+    } else {
+      user = await UsersDao.addEventToFavorites(provider.getUser()!, event.id);
+    }
+    provider.updateFavorites(user.favorites);
+    setState(() {
+      widget.event.isFavorite = !isFavorite;
+    });
+  }
 }

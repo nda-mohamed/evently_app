@@ -45,23 +45,23 @@ class Event {
   String getCategoryImage() {
     switch (categoryId) {
       case 1:
-        return 'assets/tabs/Birthday.png';
+        return 'assets/tabs/Sports.png';
       case 2:
-        return 'assets/tabs/Book_Club.png';
+        return 'assets/tabs/Birthday.png';
       case 3:
         return 'assets/tabs/Eating.png';
       case 4:
-        return 'assets/tabs/Exhibition.png';
-      case 5:
         return 'assets/tabs/Gaming.png';
-      case 6:
+      case 5:
         return 'assets/tabs/Holiday.png';
-      case 7:
+      case 6:
         return 'assets/tabs/Meeting.png';
-      case 8:
-        return 'assets/tabs/Sports.png';
-      case 9:
+      case 7:
         return 'assets/tabs/Work_Shop.png';
+      case 8:
+        return 'assets/tabs/Book_Club.png';
+      case 9:
+        return 'assets/tabs/Exhibition.png';
     }
     return '';
   }

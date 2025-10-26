@@ -52,6 +52,8 @@ dependencies:
   firebase_auth: ^6.1.0
   cloud_firestore: ^6.0.2
   flutter_svg: ^2.2.1
+  google_maps_flutter: ^2.13.1
+  location: ^8.0.1
 
 
 dev_dependencies:
@@ -83,6 +85,7 @@ flutter:
     - assets/fonts/
     - assets/icons/
     - assets/tabs/
+    - assets/map_style/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

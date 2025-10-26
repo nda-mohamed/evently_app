@@ -20,8 +20,7 @@ class EventsDao {
   }
 
   static Future<void> addEvent(Event event) async {
-    // insert into database
-    var doc = _getEventsCollection().doc(); // auto generate id
+    var doc = _getEventsCollection().doc();
     event.id = doc.id;
     await doc.set(event);
   }

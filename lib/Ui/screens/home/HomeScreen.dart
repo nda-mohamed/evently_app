@@ -21,9 +21,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int currentTabIndex = 0;
   int currentBottomNavIndex = 0;
-  List<Widget> tabs = [HomeTab(), MapTab(), FavTab(), ProfileTab()];
+
+  late List<Widget> tabs;
+
+  @override
+  void initState() {
+    super.initState();
+    tabs = [HomeTab(), MapTab(), FavTab(), ProfileTab()];
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -128,26 +134,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       body: Column(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              color: context.appColors.primary,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(24),
-                bottomRight: Radius.circular(24),
-              ),
-            ),
-            child: EventTabs(
-              Category.getCategories(includeAll: true),
-              currentTabIndex,
-              (index, category) {
-                setState(() {
-                  currentTabIndex = index;
-                });
-              },
-            ),
-          ),
-          Expanded(child: tabs[currentTabIndex]),
+          Expanded(child: tabs[currentBottomNavIndex]),
         ],
       ),
     );

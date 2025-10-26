@@ -1,3 +1,4 @@
+import 'package:evently_app/Ui/screens/home/tabs/map_tab/map_tab.dart';
 import 'package:evently_app/Ui/screens/login/LoginScreen.dart';
 import 'package:evently_app/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -58,10 +59,11 @@ class MyApp extends StatelessWidget {
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
 
-      restorationScopeId: authProvider.isLoggedInBefore() ? AppRoutes.HomeScreen.route
+      restorationScopeId: authProvider.isLoggedInBefore()
+          ? AppRoutes.HomeScreen.route
           : AppRoutes.LoginScreen.route,
 
-      initialRoute: AppRoutes.HomeScreen.route,
+      initialRoute: AppRoutes.MapTab.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
         AppRoutes.IntroScreen.route: (context) => IntroScreen(),
@@ -70,6 +72,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.ForgetPasswordScreen.route: (context) => ForgetPasswordScreen(),
         AppRoutes.HomeScreen.route: (context) => HomeScreen(),
         AppRoutes.AddEventScreen.route: (context) => AddEventScreen(),
+        AppRoutes.MapTab.route: (context) => MapTab(),
       },
     );
   }

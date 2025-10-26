@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../database/UsersDao.dart';
 import '../../database/model/AppUser.dart';
+import '../../database/model/event.dart';
 
 class AppAuthProvider extends ChangeNotifier {
   var _fb_authService = FirebaseAuth.instance; //singleton
@@ -24,9 +25,18 @@ class AppAuthProvider extends ChangeNotifier {
     retrieveUserFromDatabase();
   }
 
+  bool isFavorite(Event event){
+    return _databaseUser?.favorites.contains(event.id) ?? false;
+  }
+
   AppUser? getUser(){
     return _databaseUser;
   }
+
+  void updateFavorites(List<String> favorites){
+    _databaseUser?.favorites = favorites;
+  }
+
   void logout(){
     _fb_authService.signOut();
     _databaseUser = null;

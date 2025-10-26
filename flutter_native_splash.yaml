@@ -1,8 +1,7 @@
 flutter_native_splash:
 
-  color: "#FFFFFF"
   android: true
-  image: assets/images/splash_logo.png
+  background_image: assets/images/Splash.png
   branding: assets/images/branding1.png
   branding_mode: bottom
   branding_bottom_padding: 24

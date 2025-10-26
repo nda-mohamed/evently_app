@@ -5,7 +5,8 @@ enum AppRoutes {
   LoginScreen("Login"),
   IntroScreen("intro"),
   ForgetPasswordScreen("forget_password"),
-  AddEventScreen("add_event");
+  AddEventScreen("add_event"),
+  MapTab("map");
 
   final String route;
 
