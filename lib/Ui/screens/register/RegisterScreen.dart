@@ -60,7 +60,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       return null;
                     },
                   ),
-
                   AppFormField(
                     controller: emailController,
                     label: "E-mail",
@@ -75,7 +74,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     },
                   ),
-
                   AppFormField(
                     controller: passwordController,
                     label: "Password",
@@ -91,7 +89,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     },
                   ),
-
                   AppFormField(
                     controller: rePasswordController,
                     label: "Re-Password",
@@ -107,9 +104,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       }
                     },
                   ),
-
                   const SizedBox(height: 8),
-
                   ElevatedButton(
                     onPressed: isLoading
                         ? null
@@ -127,9 +122,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           )
                         : Text("Create Account"),
                   ),
-
                   const SizedBox(height: 8),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -150,9 +143,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 8),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [LanguageSwitcher()],

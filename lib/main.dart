@@ -13,6 +13,8 @@ import 'package:provider/provider.dart';
 import 'Ui/screens/addEvent/AddEventScreen.dart';
 import 'Ui/screens/forgetPassword/forgetPassword.dart';
 import 'Ui/screens/home/HomeScreen.dart';
+import 'Ui/screens/home/tabs/fav_tab/fav_tab.dart';
+import 'Ui/screens/home/tabs/profile_tab/profile_tab.dart';
 import 'Ui/screens/intro/introScreens.dart';
 import 'Ui/screens/register/RegisterScreen.dart';
 import 'firebase_options.dart';
@@ -63,7 +65,7 @@ class MyApp extends StatelessWidget {
           ? AppRoutes.HomeScreen.route
           : AppRoutes.LoginScreen.route,
 
-      initialRoute: AppRoutes.MapTab.route,
+      initialRoute: AppRoutes.OnBoardingScreen.route,
       routes: {
         AppRoutes.OnBoardingScreen.route: (context) => const OnBoardingScreen(),
         AppRoutes.IntroScreen.route: (context) => IntroScreen(),
@@ -73,6 +75,8 @@ class MyApp extends StatelessWidget {
         AppRoutes.HomeScreen.route: (context) => HomeScreen(),
         AppRoutes.AddEventScreen.route: (context) => AddEventScreen(),
         AppRoutes.MapTab.route: (context) => MapTab(),
+        AppRoutes.FavTab.route: (context) => FavTab(),
+        AppRoutes.ProfileTab.route: (context) => ProfileTab(),
       },
     );
   }

@@ -7,6 +7,7 @@ import '../../../routes.dart';
 import '../../common/CutomFormField.dart';
 import '../../common/language_switcher.dart';
 import '../../common/validators.dart';
+import 'FirestoreServices.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({super.key});
@@ -20,6 +21,7 @@ class _RegisterScreenState extends State<LoginScreen> {
   TextEditingController passwordController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
+  //final FirebaseGoogleAuth _googleAuth = FirebaseGoogleAuth();
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +33,7 @@ class _RegisterScreenState extends State<LoginScreen> {
           children: [
             Image.asset(AppImages.appIcon, width: 136, height: 141),
             AppNameText(),
-
             const SizedBox(height: 20),
-
             Form(
               key: formKey,
               child: Column(
@@ -53,7 +53,6 @@ class _RegisterScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-
                   AppFormField(
                     controller: passwordController,
                     label: "Password",
@@ -69,9 +68,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                       }
                     },
                   ),
-
                   const SizedBox(height: 8),
-
                   ElevatedButton(
                     onPressed: isLoading ? null : login,
                     child: isLoading
@@ -86,8 +83,27 @@ class _RegisterScreenState extends State<LoginScreen> {
                         : Text("Sign in"),
                   ),
 
-                  const SizedBox(height: 8),
+                  // ElevatedButton.icon(
+                  //   onPressed: () async {
+                  //     var user = await _googleAuth.signInWithGoogle();
+                  //     print(user.user?.displayName);
+                  //     print(user.user?.email);
+                  //   },
+                  //   icon: Image.asset(
+                  //     'assets/icons/Group 18559.png',
+                  //     height: 24,
+                  //     width: 24,
+                  //   ),
+                  //   label: Text("Sign in with Google"),
+                  //   style: ElevatedButton.styleFrom(
+                  //     backgroundColor: Colors.white,
+                  //     foregroundColor: Colors.black87,
+                  //     side: BorderSide(color: Colors.grey.shade300),
+                  //     padding: EdgeInsets.symmetric(vertical: 12),
+                  //   ),
+                  // ),
 
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -109,7 +125,6 @@ class _RegisterScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -134,9 +149,7 @@ class _RegisterScreenState extends State<LoginScreen> {
                       ),
                     ],
                   ),
-
                   const SizedBox(height: 8),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
